@@ -27,18 +27,30 @@
         <p>Un quiz interactif pour apprendre le participe passé des verbes et leur auxiliaire.</p>
     </div>
     <div class="quiz-zone">
-        <h2 id="verbTitle">Verbe à deviner</h2>
+        <h2 id="verbTitle">Chargement du verbe à deviner...</h2>
         <div class="quiz-details" id="quizDetails">
-            <ul>
-                <li>Participe passé: <br/><span id="participe"></span></li>
-                <li>Auxiliaire: <br/><span id="auxiliaire"></span></li>
-                <li></li>
-                <li>Traduction: <br/><span id="traduction"></span></li>
-            </ul>
+            <table>
+                <tr>
+                    <td>Participe(s) passé(s):</td>
+                    <td id="participeGrid"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Auxiliaire(s):</td>
+                    <td id="auxiliaire"></td>
+                </tr>
+                <tr>
+                    <td>Traduction:</td>
+                    <td id="traduction"></td>
+                </tr>
+            </table>
         </div>
         <div class="quiz-buttons">
-            <button id="reveal">Révéler</button>
-            <button id="next">Suivant</button>
+            <button id="reveal">Voir la réponse</button>
+            <button id="next">Un autre!</button>
         </div>
     </div>
 
@@ -61,18 +73,29 @@
                     });
             }
 
-            // Function to select a random verb and display its details
             function selectRandomVerb() {
                 const randomIndex = Math.floor(Math.random() * verbs.length);
                 currentVerb = verbs[randomIndex];
 
                 document.getElementById('verbTitle').textContent = currentVerb.infinif;
                 document.getElementById('auxiliaire').textContent = currentVerb.auxiliaire.join(', ');
-                document.getElementById('participe').textContent = currentVerb.participe_passé.join(', ');
                 document.getElementById('traduction').textContent = currentVerb.translation.join(', ');
+
+                // Populate the participes passés in a 2x2 grid
+                const participeGrid = document.getElementById('participeGrid');
+                participeGrid.innerHTML = ''; // Clear previous content
+
+                // Loop through participes passés and populate the grid
+                for (let i = 0; i < currentVerb.participe_passé.length; i++) {
+                    const participe = currentVerb.participe_passé[i];
+                    const cell = document.createElement('div');
+                    cell.textContent = participe;
+                    participeGrid.appendChild(cell);
+                }
 
                 hideQuizDetails(); // Hide quiz-details initially
             }
+
 
             // Function to show quiz-details
             function showQuizDetails() {
