@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Un quiz interactif pour apprendre le participe passé des verbes et leur auxiliaire.">
+    <title>Prendu - Quiz interactif</title>
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico">
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Internal CSS for quick styling -->
+    <style>
+        /* Add your CSS styles here if needed */
+        .quiz-details {
+            display: none; /* Hide quiz-details by default */
+        }
+        .quiz-details.show {
+            display: block; /* Show quiz-details when 'show' class is added */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Prendu</h1>
+        <p>Un quiz interactif pour apprendre le participe passé des verbes et leur auxiliaire.</p>
+    </div>
+    <div class="quiz-zone">
+        <h2 id="verbTitle">Verbe à deviner</h2>
+        <div class="quiz-details" id="quizDetails">
+            <ul>
+                <li>Auxiliaire: <span id="auxiliaire"></span></li>
+                <li>Participe passé: <span id="participe"></span></li>
+                <li>Traduction: <span id="traduction"></span></li>
+            </ul>
+        </div>
+        <div class="quiz-buttons">
+            <button id="reveal">Révéler</button>
+            <button id="next">Suivant</button>
+        </div>
+    </div>
+
+    <!-- JavaScript to load verbs.json and populate the quiz -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let verbs = []; // Array to hold verbs data
+            let currentVerb = null; // Variable to hold the currently displayed verb
+
+            // Function to fetch verbs data from verbs.json
+            function fetchVerbs() {
+                fetch('verbs.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        verbs = data;
+                        selectRandomVerb();
+                    })
+                    .catch(error => {
+                        console.error('Error fetching verbs:', error);
+                    });
+            }
+
+            // Function to select a random verb and display its details
+            function selectRandomVerb() {
+                const randomIndex = Math.floor(Math.random() * verbs.length);
+                currentVerb = verbs[randomIndex];
+
+                document.getElementById('verbTitle').textContent = currentVerb.infinif;
+                document.getElementById('auxiliaire').textContent = currentVerb.auxiliaire.join(', ');
+                document.getElementById('participe').textContent = currentVerb.participe_passé.join(', ');
+                document.getElementById('traduction').textContent = currentVerb.translation.join(', ');
+
+                hideQuizDetails(); // Hide quiz-details initially
+            }
+
+            // Function to show quiz-details
+            function showQuizDetails() {
+                const quizDetails = document.getElementById('quizDetails');
+                quizDetails.classList.add('show');
+            }
+
+            // Function to hide quiz-details
+            function hideQuizDetails() {
+                const quizDetails = document.getElementById('quizDetails');
+                quizDetails.classList.remove('show');
+            }
+
+            // Event listener for 'Révéler' (Reveal) button to show quiz-details
+            const revealButton = document.getElementById('reveal');
+            revealButton.addEventListener('click', function() {
+                showQuizDetails();
+            });
+
+            // Event listener for 'Suivant' (Next) button to refresh the page
+            const nextButton = document.getElementById('next');
+            nextButton.addEventListener('click', function() {
+                location.reload();
+            });
+
+            // Initial setup: fetch verbs data and select a random verb
+            fetchVerbs();
+        });
+    </script>
+</body>
+</html>
