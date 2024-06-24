@@ -234,7 +234,7 @@
     {"infinif": "rassurer", "participe_passé": ["rassuré", "rassurée", "rassurés", "rassurées"], "auxiliaire": ["avoir"], "translation": ["to reassure"]},
     {"infinif": "refuser", "participe_passé": ["refusé", "refusée", "refusés", "refusées"], "auxiliaire": ["avoir"], "translation": ["to refuse"]},
     {"infinif": "regretter", "participe_passé": ["regretté", "regrettée", "regrettés", "regrettées"], "auxiliaire": ["avoir"], "translation": ["to regret"]},
-    {"infinif": "remarquer", "participe_passé": ["remarqué", "remarquée", "remarqués", "remarquées"le"auxiliaire": ["avoir"], "translation": ["to notice", "to remark"]},
+    {"infinif": "remarquer", "participe_passé": ["remarqué", "remarquée", "remarqués", "remarquées"], "auxiliaire": ["avoir"], "translation": ["to notice", "to remark"]},
     {"infinif": "remercier", "participe_passé": ["remercié", "remerciée", "remerciés", "remerciées"], "auxiliaire": ["avoir"], "translation": ["to thank"]},
     {"infinif": "rencontrer", "participe_passé": ["rencontré", "rencontrée", "rencontrés", "rencontrées"], "auxiliaire": ["avoir"], "translation": ["to meet"]},
     {"infinif": "repasser", "participe_passé": ["repassé", "repassée", "repassés", "repassées"], "auxiliaire": ["avoir"], "translation": ["to iron"]},
